@@ -5,10 +5,10 @@ CURRENT_PATH="$( cd "$(dirname "$0")" ; pwd -P )"
 cd "$CURRENT_PATH" 
 
 # Create virtual environment directory
-python3 -m venv venv/
+# python3 -m venv venv/
 
 # Activate virtual environment
-source venv/bin/activate
+# source venv/bin/activate
 
 # Upgrade Python 
 python -m pip install --upgrade pip

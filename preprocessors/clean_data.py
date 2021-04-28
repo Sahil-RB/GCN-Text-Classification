@@ -30,7 +30,7 @@ def clean_str(a_str: str) -> str:
 
 
 def retrieve_stop_words(language: str = 'english') -> Set[str]:
-    temporary_nltk_folder = 'venv/nltk_data/'
+    temporary_nltk_folder = '/root/nltk_data'
     from nltk.corpus import stopwords
     from nltk import download
     download(info_or_id='stopwords', download_dir=temporary_nltk_folder)

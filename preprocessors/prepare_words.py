@@ -14,7 +14,7 @@ from utils.file_ops import write_iterable_to_file, create_dir, check_paths
 def extract_word_definitions(vocabulary: List[str]) -> List[str]:
     from nltk.corpus import wordnet
     from nltk import download
-    temporary_nltk_folder = 'venv/nltk_data/'
+    temporary_nltk_folder = '/root/nltk_data'
     download(info_or_id='wordnet', download_dir=temporary_nltk_folder)
 
     merged_definitions_of_words = []
