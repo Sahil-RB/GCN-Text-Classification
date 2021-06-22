@@ -181,7 +181,7 @@ def build_node_features(ds_name: str, validation_ratio: float, use_predefined_wo
     doc_meta_list = open(file=ds_corpus_meta, mode='r').read().splitlines()  # Extract Meta List
     doc_labels = extract_doc_labels(ds_corpus_meta_file=ds_corpus_meta)  # Extract Document Labels
 
-    docs_of_words = [line.split() for line in open(file=ds_corpus)]  # Extract Documents of Words
+    docs_of_words = [line.split() for line in open(file=ds_corpus) if len(line.strip()) > 1]  # Extract Documents of Words
 
     # Extract mean document word vectors and one hot labels of train-set
     x = compute_x(docs_of_words, adjusted_train_size, word_emb_dim, w_vectors=word_vectors)
