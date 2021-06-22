@@ -172,7 +172,7 @@ def build_node_features(ds_name: str, validation_ratio: float, use_predefined_wo
     # Extract word_vectors and word_embedding_dimension
     if use_predefined_word_vectors:
         ds_corpus_word_vectors = cfg.corpus_shuffled_word_vectors_dir + ds_name + '.word_vectors'
-        # ds_corpus_word_vectors =  'glove.6B.300d.txt'  # Alternatively, you can use GLOVE word-embeddings
+        ds_corpus_word_vectors =  'glove.6B.300d.txt'  # Alternatively, you can use GLOVE word-embeddings
         word_vectors, word_emb_dim = load_word_to_word_vectors(path=ds_corpus_word_vectors)
     else:
         word_vectors, word_emb_dim = OrderedDict(), 300  # todo: parametrize
@@ -185,9 +185,9 @@ def build_node_features(ds_name: str, validation_ratio: float, use_predefined_wo
     for i,words in enumerate(docs_of_words):
       if words == []:
         if doc_meta_list[i].split('\t')[-1] == 'ham':
-          docs_of_words[i] = ['meeting','tomorrow']
+          words.extend(['MEETING','TOMORROW'])
         else:
-          docs_of_words[i] = ['WIN','LOTTERY']
+          words.extend(['WIN','LOTTERY'])
 
     # Extract mean document word vectors and one hot labels of train-set
     x = compute_x(docs_of_words, adjusted_train_size, word_emb_dim, w_vectors=word_vectors)
