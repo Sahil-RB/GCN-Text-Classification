@@ -29,8 +29,11 @@ def compute_x(docs_of_words: List[List[str]], tr_size: int, emb_dim: int, w_vect
             if word in w_vectors:
                 doc_vec += w_vectors[word]
 
+        try:
             mean_doc_vec = (doc_vec / len(words)).tolist()
             data_x.extend(mean_doc_vec)
+        except:
+            pass
 
     row_indexes = np.array([[i] * emb_dim for i in range(tr_size)]).flatten().tolist()
     col_indexes = list(range(emb_dim)) * tr_size
@@ -61,8 +64,11 @@ def compute_tx(docs_of_words: List[List[str]], test_size: int, real_train_size: 
             if word in w_vectors:
                 doc_vec += w_vectors[word]
 
-        mean_doc_vec = (doc_vec / len(words)).tolist()
-        data_tx.extend(mean_doc_vec)
+        try:
+            mean_doc_vec = (doc_vec / len(words)).tolist()
+            data_tx.extend(mean_doc_vec)
+        except:
+            pass
 
     row_indexes = np.array([[i] * word_emb_dim for i in range(test_size)]).flatten().tolist()
     col_indexes = list(range(word_emb_dim)) * test_size
@@ -95,9 +101,11 @@ def compute_allx(docs_of_words: List[List[str]], real_train_size: int, vocab: Li
         for word in words:
             if word in word_vectors:
                 doc_vec += word_vectors[word]
-
-        mean_doc_vec = (doc_vec / len(words)).tolist()
-        data_allx.extend(mean_doc_vec)
+        try:
+            mean_doc_vec = (doc_vec / len(words)).tolist()
+            data_allx.extend(mean_doc_vec)
+        except:
+            pass
 
     data_allx.extend(word_vectors_arr.flatten())
     data_allx = np.array(data_allx)
@@ -182,12 +190,12 @@ def build_node_features(ds_name: str, validation_ratio: float, use_predefined_wo
     doc_labels = extract_doc_labels(ds_corpus_meta_file=ds_corpus_meta)  # Extract Document Labels
 
     docs_of_words = [line.split() for line in open(file=ds_corpus)]  # Extract Documents of Words
-    for i,words in enumerate(docs_of_words):
-      if words == []:
-        if doc_meta_list[i].split('\t')[-1] == 'ham':
-          words.extend(['MEETING','TOMORROW'])
-        else:
-          words.extend(['WIN','LOTTERY'])
+    # for i,words in enumerate(docs_of_words):
+    #   if words == []:
+    #     if doc_meta_list[i].split('\t')[-1] == 'ham':
+    #       words.extend(['MEETING','TOMORROW'])
+    #     else:
+    #       words.extend(['WIN','LOTTERY'])
 
     # Extract mean document word vectors and one hot labels of train-set
     x = compute_x(docs_of_words, adjusted_train_size, word_emb_dim, w_vectors=word_vectors)
