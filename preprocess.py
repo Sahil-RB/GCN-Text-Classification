@@ -10,7 +10,7 @@ from preprocessors.shuffle_data import shuffle_data
 
 def create_preprocessing_cfg() -> PreProcessingConfigs:
     conf = PreProcessingConfigs()
-    conf.data_sets = ['20ng', 'R8', 'R52', 'ohsumed', 'mr', 'cora', 'citeseer', 'pubmed']
+    conf.data_sets = ['20ng', 'R8', 'R52', 'ohsumed', 'mr', 'cora', 'citeseer', 'pubmed', 'messages']
     conf.data_set_extension = '.txt'
     conf.corpus_dir = 'data/corpus/'
     conf.corpus_meta_dir = 'data/corpus/meta/'
